@@ -1,12 +1,17 @@
 'use client'
 
-import { supabase } from '@/utils/supabase/supabaseClient'
+import { supabase } from '@/supabase/supabaseClient'
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
+type PlaceType = {
+  id: number
+  name: string
+  slug: string
+}
 export default function Home() {
   const [fetchError, setFetchError] = useState(false)
-  const [fetchedData, setFetchedData] = useState<{id: number, name: string}[] | null>(null)
+  const [places, setPlaces] = useState<PlaceType[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,13 +21,13 @@ export default function Home() {
 
       if (error) {
         setFetchError(true)
-        setFetchedData(null)
+        setPlaces([])
         console.log(error)
       }
 
       if (data) {
         setFetchError(false)
-        setFetchedData(data)
+        setPlaces(data)
       }
     }
 
@@ -31,8 +36,8 @@ export default function Home() {
   return (
     <>
       {
-        fetchedData?.map(data => (
-          <Link href={`/${data.name}`}>{data.name}</Link>
+        places?.map(place => (
+          <Link href={place.slug} key={place.id}>{place.name}</Link>
         ))
       }
     </>
