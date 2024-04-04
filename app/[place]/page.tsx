@@ -1,49 +1,16 @@
-'use client'
-
-import { useEffect, useState } from "react"
 import { supabase } from '@/supabase/supabaseClient'
 import Link from "next/link"
+import { notFound } from 'next/navigation'
 
-type ShrineType = {
-    id: number
-    name: string
-    slug: string
-    place: {
-        id: number
-        name: string
-        logo?: string
-        slug: string
-    }
-}
-
-export default function ShrineList({ params }: {
+export default async function ShrineList({ params }: {
     params: { place: string }
 }) {
-    const [fetchError, setFetchError] = useState(false)
-    const [shrines, setShrines] = useState<ShrineType[]>([])
-
-    useEffect(() => {
-        const fetchShrines = async () => {
-            const { data, error } = await supabase
-                .from('shrines')
-                .select('*, place!inner(*)')
-                .eq('place.slug', params.place)
-
-
-            if (error) {
-                setFetchError(true)
-                console.log(error)
-                setShrines([])
-            }
-
-            if (data) {
-                setFetchError(false)
-                setShrines(data)
-            }
-        }
-
-        fetchShrines()
-    }, [params.place])
+    const { data: shrines } = await supabase
+        .from('shrines')
+        .select('*, place!inner(*)')
+        .eq('place.slug', params.place)
+    
+    if(!shrines || shrines.length === 0) notFound()
     return (
         <div>
             {
