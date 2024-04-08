@@ -5,11 +5,12 @@ export default async function Home() {
   const { data: places } = await supabase
     .from('places')
     .select()
+    
   return (
-    <div className='flex flex-col gap-4 w-screen px-4 py-4'>
+    <div className='flex flex-col gap-4 w-screen px-4 py-4 min-h-screen bg-[#F5E9E6]'>
       {
         places?.map(place => (
-            <Places logo={place.logo} link={place.slug} key={place.id} name={place.name}/>
+            <Places key={place.id} data={place}/>
         ))
       }
     </div>

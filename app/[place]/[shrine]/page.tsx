@@ -1,6 +1,5 @@
+import { Supplications } from "@/components/Supplications"
 import { supabase } from "@/supabase/supabaseClient"
-import Link from "next/link"
-import { notFound } from "next/navigation"
 
 export default async function SupplicationList({ params }: {
     params: { shrine: string }
@@ -10,13 +9,11 @@ export default async function SupplicationList({ params }: {
         .select(`*, shrine!inner(slug)`)
         .eq('shrine.slug', params.shrine)
 
-    if(!supplications || supplications.length === 0) notFound()
-
     return (
-        <>
+        <div className='flex flex-col gap-4 w-screen min-h-screen px-4 py-4 bg-[#F5E9E6]'>
             {supplications?.map(supplication => (
-                <Link key={supplication.id} href={`${params.shrine}/${supplication.id}`}>{supplication.title}</Link>
+                <Supplications key={supplication.id} path={params.shrine} data={supplication} />
             ))}
-        </>
+        </div>
     )
 }
