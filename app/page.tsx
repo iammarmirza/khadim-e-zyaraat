@@ -1,21 +1,17 @@
 import { supabase } from '@/supabase/supabaseClient'
-import Link from 'next/link';
-import Image from 'next/image';
+import { Places } from '@/components/Places';
 
 export default async function Home() {
   const { data: places } = await supabase
     .from('places')
     .select()
   return (
-    <>
+    <div className='flex flex-col gap-4 w-screen px-4 py-4'>
       {
         places?.map(place => (
-          <>
-            <Link href={place.slug} key={place.id}>{place.name}</Link>
-            <Image src={`/${place.logo}`} width={100} height={100} alt='place image'/>
-          </>
+            <Places logo={place.logo} link={place.slug} key={place.id} name={place.name}/>
         ))
       }
-    </>
+    </div>
   );
 }
