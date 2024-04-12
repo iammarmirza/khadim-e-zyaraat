@@ -1,21 +1,20 @@
 import { SupplicationDetails } from "@/components/SupplicationDetails"
 import { supabase } from "@/supabase/supabaseClient"
+import { notFound } from "next/navigation"
 
 export default async function SupplicationById({ params }: {
     params: { id: number }
 }) {
-    const { data: supplication } = await supabase
+    const { data: supplication, error } = await supabase
         .from('data')
         .select(`*, supplication!inner(id)`)
         .eq('supplication.id', params.id)
         .single()
-
-    if(!supplication) throw new Error('No supplication data for the given query!')
+    if(error) throw new Error()
+    if(!supplication) notFound()
 
     return (
-        <>
-            {supplication && <SupplicationDetails data={supplication} />}
-        </>
+        <SupplicationDetails data={supplication} />
     )
 
 }

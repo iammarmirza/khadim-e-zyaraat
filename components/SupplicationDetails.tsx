@@ -1,4 +1,5 @@
 import { Noto_Naskh_Arabic } from 'next/font/google'
+import { hasEnglishText } from '@/utils/langcheck'
 
 const testSentence = `User
 ETIQUETTES OF ZIYARAH
@@ -52,39 +53,38 @@ He further says, “When they perform ziyarah, women must isolate themselves fro
 `
 
 type SupplicationDetailProps = {
-    id: number
-    text: string
-    supplication: {
+    data: {
         id: number
+        text: string
+        supplication: {
+            id: number
+        }
     }
+
 }
 
 const arabicFont = Noto_Naskh_Arabic({
     subsets: ['arabic'],
     weight: ['400', '700']
 })
-export const SupplicationDetails = (props: {
-    data: SupplicationDetailProps
-}) => {
+export const SupplicationDetails = (props: SupplicationDetailProps) => {
 
-    const isEnglish = (text: string) => {
-        const englishRegex = /^[a-zA-Z\s\d!"#$%&'()*+,-\.\/:;<=>?@\[\]^_`{|}~]+$/
-        return englishRegex.test(text)
-    }
-    
-    const renderFont = () => {
-        const lines = testSentence.split('\n')
+    const {text} = props.data
+    const renderSupplication = () => {
+
+        const lines = text.split('\n').filter(line => line !== '')
+
         return lines.map((line, index) => {
-            if(isEnglish(line)) {
-                return <p key={index} className='underline'>{line}</p>
-            } else {
-                return <p key={index} dir='rtl' className={`text-3xl leading-relaxed font-semibold text-justify ${arabicFont.className}`}>{line}</p>
-            }
+            const isEnglish = hasEnglishText(line)
+            return <p
+                key={index}
+                dir={isEnglish ? 'ltr' : 'rtl'}
+                className={isEnglish ? 'text-xl' : `text-xl leading-relaxed font-semibold text-justify ${arabicFont.className}`}>{line}</p>
         })
     }
     return (
         <div className="flex flex-col min-h-screen w-screen px-6 py-5 bg-[#F5E9E6] gap-7">
-           {renderFont()}
+            {renderSupplication()}
         </div>
     )
 }

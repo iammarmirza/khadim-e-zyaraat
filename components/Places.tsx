@@ -2,13 +2,15 @@ import Image from "next/image"
 import Link from "next/link"
 
 type PlaceProps = {
-   id: number
-   name: string
-   logo: string
-   slug: string
+    data: {
+        id: number
+        name: string
+        logo: string
+        slug: string
+    }
 }
 
-export const Places = (props: {data: PlaceProps}) => {
+export const Places = (props: PlaceProps) => {
     const { name, logo, slug} = props.data
     return (
         <Link href={slug} className="rounded-lg border overflow-hidden w-full h-32 relative">
