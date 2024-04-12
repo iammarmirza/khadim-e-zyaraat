@@ -9,7 +9,7 @@ export default async function ShrineList({ params }: {
         .select('*, place!inner(*)')
         .eq('place.slug', params.place)
 
-        if(!shrines || shrines.length === 0) throw new Error()
+        if(!shrines || shrines.length === 0) throw new Error('No shrines found for this query!')
         return (
             <div className='flex flex-col gap-4 w-screen min-h-screen px-4 py-4 bg-[#F5E9E6]'>
                 {
