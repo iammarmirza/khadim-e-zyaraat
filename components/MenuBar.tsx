@@ -6,21 +6,22 @@ export const MenuBar = () => {
     const router = useRouter()
     const path = usePathname()
     return (
-        <>
-            <div className="w-screen flex flex-row justify-between px-3 py-4 text-white font-semibold bg-primary items-center">
-                {path === '/' ?
-                    (
-                        <p className='text-2xl'>Khadim e Zyaraat</p>
-                    ) :
-                    (
-                        <button onClick={() => router.back()}>
-                            <ArrowLeftIcon className="h-8 w-8" />
-                        </button>
-                    )}
+        <div className="flex flex-row justify-between px-3 py-4 text-white font-semibold bg-primary items-center">
+            {path === '/' ?
+                (
+                    <p className='text-2xl'>Khadim e Zyaraat</p>
+                ) :
+                (
+                    <button onClick={() => router.back()}>
+                        <ArrowLeftIcon className="h-8 w-8" />
+                    </button>
+                )}
+            {
+                path === '/' &&
                 <button>
-                    <CogIcon className="h-8 w-8" />
+                    <CogIcon className='h-8 w-8' />
                 </button>
-            </div>
-        </>
+            }
+        </div>
     )
 }
