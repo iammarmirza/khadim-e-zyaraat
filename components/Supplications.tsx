@@ -14,7 +14,7 @@ type SupplicationProps = {
 export const Supplications = (props: SupplicationProps) => {
     const { id, title } = props.data
     return (
-        <Link className='w-full bg-white py-3 text-xl flex items-center px-5 rounded-md shadow-lg font-semibold'
+        <Link className='w-full bg-white py-3 text-xl flex items-center px-5 rounded-md font-semibold'
             href={`${props.path}/${id}`}>{title}</Link>
     )
 }

@@ -19,7 +19,7 @@ type ShrineProps = {
 export const Shrines = (props: ShrineProps) => {
     const { slug, name } = props.data
     return (
-        <Link className='w-full bg-white py-3 text-xl flex items-center px-5 rounded-md shadow-lg font-semibold'
+        <Link className='w-full bg-white py-3 text-xl flex items-center px-5 rounded-md font-semibold'
             href={`${props.path}/${slug}`}>{name}
         </Link>
     )
