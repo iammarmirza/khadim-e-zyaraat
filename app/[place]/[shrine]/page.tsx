@@ -1,5 +1,7 @@
+import { DetailsBox } from "@/components/DetailsBox"
 import { Supplications } from "@/components/Supplications"
 import { supabase } from "@/supabase/supabaseClient"
+import { notFound } from "next/navigation"
 
 export default async function SupplicationList({ params }: {
     params: { shrine: string }
@@ -10,16 +12,17 @@ export default async function SupplicationList({ params }: {
         .eq('shrine.slug', params.shrine)
 
     if (error) throw new Error()
+    if (supplications.length === 0) notFound()
 
     return (
-        <div className='flex flex-col gap-4 w-screen min-h-screen px-4 py-4 bg-[#F5E9E6]'>
-            {supplications.length > 0 ? supplications.map(supplication => (
-                <Supplications key={supplication.id} path={params.shrine} data={supplication} />
-            )) : (
-                <div className="flex flex-col w-screen h-screen items-center justify-center bg-[#F5E9E6] px-5 gap-6">
-                    <h2 className="text-3xl font-bold text-center">The data for the given query has not been found!</h2>
-                </div>
-            )}
-        </div>
+        <div className='flex w-screen flex-1 bg-primary-BACKGROUND justify-center px-6 py-8'>
+            <DetailsBox>
+                {
+                    supplications.map(supplication => (
+                        <Supplications data={supplication} path={params.shrine} />
+                    ))
+                }
+            </DetailsBox>
+        </ div>
     )
 }

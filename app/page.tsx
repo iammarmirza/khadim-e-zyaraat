@@ -6,15 +6,18 @@ export default async function Home() {
     .from('places')
     .select()
 
-  if(error) throw new Error()
-    
+  if (error) throw new Error()
+
   return (
-    <div className='flex flex-col gap-2 w-screen px-2 py-4 min-h-screen bg-[#F5E9E6]'>
-      {
-        places?.map(place => (
-            <Places key={place.id} data={place}/>
-        ))
-      }
-    </div>
+    <div className='flex justify-center bg-primary-BACKGROUND'>
+      <div className='flex flex-col gap-2 w-screen px-2 py-4 min-h-screen max-w-[768px]'>
+        {
+          places?.map(place => (
+            <Places key={place.id} data={place} />
+          ))
+        }
+      </div>
+    </ div>
+
   );
 }

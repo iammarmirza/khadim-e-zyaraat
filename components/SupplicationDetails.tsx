@@ -32,7 +32,7 @@ export const SupplicationDetails = (props: SupplicationDetailProps) => {
         })
     }
     return (
-        <div className="flex flex-col min-h-screen w-screen px-6 py-5 bg-[#F5E9E6] gap-7">
+        <div className="flex flex-col min-h-screen w-screen px-6 py-5 bg-primary-BACKGROUND gap-7">
             {renderSupplication()}
         </div>
     )

@@ -23,7 +23,7 @@ export default function RootLayout({
       <meta name="theme-color" content="#737854" />
       </head>
       <body>
-        <main className="min-h-screen flex flex-col">
+        <main className="min-h-screen flex flex-col max-w-screen">
           <MenuBar />
           {children}
         </main>
