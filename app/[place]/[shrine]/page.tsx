@@ -9,14 +9,16 @@ export default async function SupplicationList({ params }: {
         .select(`*, shrine!inner(slug)`)
         .eq('shrine.slug', params.shrine)
 
-    if(error) throw new Error()
+    if (error) throw new Error()
 
     return (
         <div className='flex flex-col gap-4 w-screen min-h-screen px-4 py-4 bg-[#F5E9E6]'>
             {supplications.length > 0 ? supplications.map(supplication => (
                 <Supplications key={supplication.id} path={params.shrine} data={supplication} />
-            )): (
-                <p className="text-2xl self-center font-semibold">No supplications found for the given query</p>
+            )) : (
+                <div className="flex flex-col w-screen h-screen items-center justify-center bg-[#F5E9E6] px-5 gap-6">
+                    <h2 className="text-3xl font-bold text-center">The data for the given query has not been found!</h2>
+                </div>
             )}
         </div>
     )
