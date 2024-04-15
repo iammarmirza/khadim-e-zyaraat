@@ -1,5 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
+import { MenuBar } from "@/components/MenuBar";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -18,8 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className}>
+      <head>
+      <meta name="theme-color" content="#737854" />
+      </head>
       <body>
         <main className="min-h-screen flex flex-col">
+          <MenuBar />
           {children}
         </main>
       </body>
