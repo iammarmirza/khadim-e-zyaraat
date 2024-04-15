@@ -9,17 +9,17 @@ export const MenuBar = () => {
         <div className="flex flex-row justify-between px-3 py-4 text-white font-semibold bg-primary items-center">
             {path === '/' ?
                 (
-                    <p className='text-2xl'>Khadim e Zyaraat</p>
+                    <p className='text-xl'>Khadim e Zyaraat</p>
                 ) :
                 (
                     <button onClick={() => router.back()}>
-                        <ArrowLeftIcon className="h-8 w-8" />
+                        <ArrowLeftIcon className="h-6 w-6"/>
                     </button>
                 )}
             {
                 path === '/' &&
                 <button>
-                    <CogIcon className='h-8 w-8' />
+                    <CogIcon className='h-6 w-6'/>
                 </button>
             }
         </div>
