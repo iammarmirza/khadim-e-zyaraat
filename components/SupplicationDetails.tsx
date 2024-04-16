@@ -14,7 +14,7 @@ type SupplicationDetailProps = {
 
 const arabicFont = Noto_Naskh_Arabic({
     subsets: ['arabic'],
-    weight: ['400', '700']
+    weight: ['400']
 })
 export const SupplicationDetails = (props: SupplicationDetailProps) => {
 
@@ -28,7 +28,7 @@ export const SupplicationDetails = (props: SupplicationDetailProps) => {
             return <p
                 key={index}
                 dir={isEnglish ? 'ltr' : 'rtl'}
-                className={isEnglish ? 'text-xl' : `text-2xl tracking-wide line-clamp-2 leading-relaxed font-semibold text-justify ${arabicFont.className}`}>{line}</p>
+                className={isEnglish ? 'text-xl' : `text-2xl tracking-wide leading-loose font-semibold text-justify ${arabicFont.className}`}>{line}</p>
         })
     }
     return (
